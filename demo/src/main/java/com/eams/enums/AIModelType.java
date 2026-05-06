@@ -1,0 +1,6 @@
+package com.eams.enums;
+
+public enum AIModelType {
+        CLASSIFICATION, REGRESSION, ANOMALY_DETECTION, FORECASTING, NLP, RECOMMENDATION
+
+}

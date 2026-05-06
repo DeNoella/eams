@@ -1,0 +1,6 @@
+package com.eams.enums;
+
+public enum AiAnomalyType {
+    USAGE_SPIKE, BULK_EXPORT, AFTER_HOURS_ACCESS, PRIVILEGE_ESCALATION, MASS_DELETION, COST_OUTLIER
+
+}

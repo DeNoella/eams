@@ -1,0 +1,6 @@
+package com.eams.enums;
+
+public enum AiPredictionType {
+    FAILURE_RISK, LICENCE_OVERRUN, EXPIRY_FORECAST, LIFECYCLE_RECOMMENDATION, COST_ANOMALY
+
+}

@@ -1,0 +1,267 @@
+{
+  "meta": {
+    "name": "E-AMS Backend Test Data",
+    "baseUrl": "http://localhost:8081/api/v1",
+    "notes": [
+      "Use Bearer token for protected endpoints.",
+      "Run auth flow first to get token.",
+      "Replace placeholder UUIDs with actual IDs created in your environment."
+    ]
+  },
+  "environmentVariables": {
+    "baseUrl": "http://localhost:8081/api/v1",
+    "email": "mutesideno@gmail.com",
+    "organisationId": "00000000-0000-0000-0000-000000000001",
+    "serverCategoryId": "00000000-0000-0000-0002-000000000003"
+  },
+  "auth": {
+    "register": {
+      "method": "POST",
+      "url": "{{baseUrl}}/auth/register",
+      "body": {
+        "employeeId": "EMP-1001",
+        "fullName": "Mute Side",
+        "email": "{{email}}",
+        "phone": "+250700123456",
+        "jobTitle": "System Administrator"
+      }
+    },
+    "requestMagicLink": {
+      "method": "POST",
+      "url": "{{baseUrl}}/auth/magic-link/request",
+      "body": {
+        "email": "{{email}}"
+      }
+    },
+    "verifyMagicLink": {
+      "method": "GET",
+      "url": "{{baseUrl}}/auth/magic-link/verify?token={{tokenFromEmail}}&email={{email}}"
+    },
+    "refresh": {
+      "method": "POST",
+      "url": "{{baseUrl}}/auth/refresh"
+    }
+  },
+  "users": {
+    "createUser": {
+      "method": "POST",
+      "url": "{{baseUrl}}/users",
+      "body": {
+        "employeeId": "EMP-1002",
+        "fullName": "Alice Admin",
+        "email": "alice.admin@example.com",
+        "phone": "+250700000001",
+        "jobTitle": "Asset Manager",
+        "employmentType": "PERMANENT",
+        "employmentStatus": "ACTIVE"
+      }
+    },
+    "updateUser": {
+      "method": "PUT",
+      "url": "{{baseUrl}}/users/{{userId}}",
+      "body": {
+        "fullName": "Alice Admin Updated",
+        "phone": "+250700000999",
+        "jobTitle": "Senior Asset Manager",
+        "mfaEnabled": true
+      }
+    },
+    "changeStatus": {
+      "method": "PUT",
+      "url": "{{baseUrl}}/users/{{userId}}/status?status=SUSPENDED"
+    },
+    "assignRole": {
+      "method": "POST",
+      "url": "{{baseUrl}}/users/{{userId}}/roles",
+      "body": {
+        "roleId": "{{roleId}}",
+        "assignedByUserId": "{{adminUserId}}"
+      }
+    }
+  },
+  "assets": {
+    "createAsset": {
+      "method": "POST",
+      "url": "{{baseUrl}}/assets",
+      "body": {
+        "assetCategoryId": "{{serverCategoryId}}",
+        "name": "Core Banking Server 01",
+        "description": "Primary production server",
+        "criticality": "CRITICAL",
+        "status": "ACTIVE",
+        "lifecycleStage": "IN_SERVICE",
+        "yearOfInstallation": 2024,
+        "acquisitionCost": 12000.0,
+        "currencyCode": "USD",
+        "annualCost": 1800.0,
+        "purchaseOrderRef": "PO-2026-1001",
+        "vendorName": "Dell",
+        "supportContractRef": "SUP-DEL-2026",
+        "supportExpiryDate": "2027-12-31",
+        "warrantyExpiryDate": "2028-12-31",
+        "notes": "Mission critical node",
+        "barcode": "ASSET-SRV-0001"
+      }
+    },
+    "updateAsset": {
+      "method": "PUT",
+      "url": "{{baseUrl}}/assets/{{assetId}}",
+      "body": {
+        "assetCategoryId": "{{serverCategoryId}}",
+        "name": "Core Banking Server 01 Updated",
+        "description": "Primary production server (updated)",
+        "criticality": "HIGH",
+        "status": "ACTIVE",
+        "lifecycleStage": "IN_SERVICE"
+      }
+    }
+  },
+  "certificates": {
+    "createCertificate": {
+      "method": "POST",
+      "url": "{{baseUrl}}/certificates",
+      "body": {
+        "assetId": "{{assetId}}",
+        "certificateType": "SERVER",
+        "issuingAuthority": "DigiCert",
+        "subjectDn": "CN=corebanking.example.com, O=E-AMS",
+        "commonName": "corebanking.example.com",
+        "sanEntries": [
+          "corebanking.example.com",
+          "api.corebanking.example.com"
+        ],
+        "serialNumber": "ABCD1234EFGH",
+        "fingerprintSha256": "1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+        "algorithm": "RSA_2048",
+        "issueDate": "2026-01-01",
+        "expiryDate": "2027-01-01",
+        "renewalLeadDays": 90,
+        "autoRenewalEnabled": false,
+        "environment": "PRODUCTION",
+        "ownerUserId": "{{userId}}",
+        "status": "VALID"
+      }
+    }
+  },
+  "licences": {
+    "createLicence": {
+      "method": "POST",
+      "url": "{{baseUrl}}/licences",
+      "body": {
+        "assetId": "{{assetId}}",
+        "licenceType": "SUBSCRIPTION",
+        "totalSeats": 100,
+        "usedSeats": 67,
+        "expiryDate": "2027-06-30",
+        "status": "VALID",
+        "renewalLeadDays": 90,
+        "softwareAssuranceExpiry": "2027-05-30",
+        "keyOrReference": "LIC-REF-2026-001",
+        "seatAlertThresholdPct": 85
+      }
+    }
+  },
+  "accessGrants": {
+    "createAccessGrant": {
+      "method": "POST",
+      "url": "{{baseUrl}}/access-grants",
+      "body": {
+        "requestorUserId": "{{userId}}",
+        "approvingUserId": "{{approverUserId}}",
+        "accessType": "ELEVATED_RIGHTS",
+        "targetAssetId": "{{assetId}}",
+        "businessJustification": "Urgent production patch",
+        "expiresAt": "2026-12-31T23:59:59Z",
+        "riskLevel": "HIGH",
+        "ticketReference": "INC-2026-1001"
+      }
+    },
+    "revokeAccessGrant": {
+      "method": "POST",
+      "url": "{{baseUrl}}/access-grants/{{grantId}}/revoke",
+      "body": {
+        "revokingUserId": "{{securityOfficerUserId}}",
+        "confirmation": "Access removed from target system."
+      }
+    }
+  },
+  "changeRequests": {
+    "createChangeRequest": {
+      "method": "POST",
+      "url": "{{baseUrl}}/change-requests",
+      "body": {
+        "targetAssetId": "{{assetId}}",
+        "changeType": "CONFIGURATION",
+        "description": "Enable hardened TLS ciphers",
+        "businessJustification": "Security hardening",
+        "revertPlan": "Restore prior cipher suite config backup",
+        "scheduledRevertDate": "2026-12-15",
+        "riskAssessment": "Low risk in maintenance window"
+      }
+    },
+    "makePermanent": {
+      "method": "POST",
+      "url": "{{baseUrl}}/change-requests/{{changeRequestId}}/make-permanent",
+      "body": {
+        "reason": "Change validated and approved for permanent state"
+      }
+    }
+  },
+  "transactions": {
+    "checkout": {
+      "method": "POST",
+      "url": "{{baseUrl}}/transactions/checkout",
+      "body": {
+        "assetId": "{{assetId}}",
+        "toUserId": "{{userId}}",
+        "expectedReturnDate": "2026-12-31",
+        "purpose": "Temporary assignment for project work",
+        "conditionOnOut": "GOOD",
+        "authorisingUserId": "{{authoriserUserId}}"
+      }
+    },
+    "checkin": {
+      "method": "POST",
+      "url": "{{baseUrl}}/transactions/checkin",
+      "body": {
+        "transactionId": "{{transactionId}}",
+        "conditionOnIn": "GOOD",
+        "notes": "Returned in good condition",
+        "incidentTicketRef": "HD-2026-777"
+      }
+    },
+    "transfer": {
+      "method": "POST",
+      "url": "{{baseUrl}}/transactions/transfer",
+      "body": {
+        "assetId": "{{assetId}}",
+        "toLocationId": "{{locationId}}",
+        "toDepartmentId": "{{departmentId}}",
+        "authorisingUserId": "{{authoriserUserId}}",
+        "notes": "Transferred to branch office"
+      }
+    }
+  },
+  "dashboardAiReports": {
+    "executiveDashboard": {
+      "method": "GET",
+      "url": "{{baseUrl}}/dashboard/executive"
+    },
+    "aiChat": {
+      "method": "POST",
+      "url": "{{baseUrl}}/ai/chat",
+      "body": {
+        "message": "Which critical assets have expiring certificates in 90 days?",
+        "sessionId": "{{sessionId}}"
+      }
+    },
+    "assetInventoryReport": {
+      "method": "GET",
+      "url": "{{baseUrl}}/reports/asset-inventory?format=pdf"
+    },
+    "licenceComplianceReport": {
+      "method": "GET",
+      "url": "{{baseUrl}}/reports/licence-compliance?organisationId={{organisationId}}"
+    }
+  }
+}

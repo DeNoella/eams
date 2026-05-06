@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-AMS Expiry Alert</title>
+</head>
+<body style="margin:0; padding:0; background-color:#F5F0E8; font-family:Arial, Helvetica, sans-serif; color:#3D2B1F; -webkit-font-smoothing:antialiased;">
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+       style="background-color:#F5F0E8; padding:24px 12px;">
+    <tr>
+        <td align="center">
+
+            <!-- HEADER BAR -->
+            <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"
+                   style="max-width:600px; width:100%; background-color:#6B2D0E;">
+                <tr>
+                    <td align="center" style="padding:24px 24px;">
+                        <span style="font-family:Arial, Helvetica, sans-serif; color:#FFFFFF; font-size:18px;
+                                     font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">
+                            NATIONAL BANK OF RWANDA &middot; BNR
+                        </span>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- BODY CARD -->
+            <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"
+                   style="max-width:600px; width:100%; background-color:#FFFFFF;
+                          border-top:4px solid #6B2D0E;">
+                <tr>
+                    <td style="padding:40px 48px; font-family:Arial, Helvetica, sans-serif;">
+
+                        <p style="margin:0 0 8px 0; font-size:11px; font-weight:700; letter-spacing:0.08em;
+                                  text-transform:uppercase; color:#7A6B1A;">
+                            Expiry Alert
+                        </p>
+                        <h1 style="margin:0 0 20px 0; font-size:20px; font-weight:700; color:#2C1810;
+                                   font-family:Arial, Helvetica, sans-serif;">
+                            Action required &mdash;
+                            <span th:text="${resourceType}" style="color:#6B2D0E;">Certificate</span>
+                            expiring soon
+                        </h1>
+
+                        <p style="margin:0 0 16px 0; font-size:16px; color:#2C1810; font-weight:600;">
+                            Hello <span th:text="${name}">User</span>,
+                        </p>
+
+                        <p style="margin:0 0 16px 0; font-size:15px; line-height:1.6; color:#3D2B1F;">
+                            The following item is approaching its expiry date and requires your attention.
+                        </p>
+
+                        <!-- Detail block -->
+                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                               style="margin:8px 0 24px 0; border:1px solid #D4C4A8; border-collapse:collapse;">
+                            <tr>
+                                <td style="padding:12px 16px; background-color:#F5F0E8;
+                                           font-size:12px; font-weight:700; color:#3D2B1F;
+                                           text-transform:uppercase; letter-spacing:0.05em;
+                                           width:35%; border-bottom:1px solid #D4C4A8;">
+                                    Type
+                                </td>
+                                <td style="padding:12px 16px; font-size:14px; color:#2C1810;
+                                           border-bottom:1px solid #D4C4A8;"
+                                    th:text="${resourceType}">Certificate</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:12px 16px; background-color:#F5F0E8;
+                                           font-size:12px; font-weight:700; color:#3D2B1F;
+                                           text-transform:uppercase; letter-spacing:0.05em;
+                                           border-bottom:1px solid #D4C4A8;">
+                                    Name
+                                </td>
+                                <td style="padding:12px 16px; font-size:14px; color:#2C1810;
+                                           border-bottom:1px solid #D4C4A8;"
+                                    th:text="${resourceName}">Resource Name</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:12px 16px; background-color:#F5F0E8;
+                                           font-size:12px; font-weight:700; color:#3D2B1F;
+                                           text-transform:uppercase; letter-spacing:0.05em;">
+                                    Days Remaining
+                                </td>
+                                <td style="padding:12px 16px; font-size:16px; font-weight:700; color:#6B2D0E;">
+                                    <span th:text="${daysRemaining}">30</span> days
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="margin:0 0 8px 0; font-size:13px; line-height:1.55; color:#7A6B1A; font-style:italic;">
+                            Please review this item in the E-AMS platform and renew or take corrective action
+                            before the expiry date.
+                        </p>
+
+                    </td>
+                </tr>
+            </table>
+
+            <!-- FOOTER BAR -->
+            <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"
+                   style="max-width:600px; width:100%; background-color:#F5F0E8;
+                          border-top:1px solid #D4C4A8;">
+                <tr>
+                    <td align="center" style="padding:20px 24px;">
+                        <p style="margin:0; font-family:Arial, Helvetica, sans-serif;
+                                  font-size:12px; color:#3D2B1F; line-height:1.5;">
+                            &copy; 2026 NATIONAL BANK OF RWANDA &middot; BNR
+                            &middot; Powered by BNR-compliant infrastructure
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

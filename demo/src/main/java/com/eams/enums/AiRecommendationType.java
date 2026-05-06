@@ -1,0 +1,6 @@
+package com.eams.enums;
+
+public enum AiRecommendationType {
+DECOMMISSION_ASSET, CONSOLIDATE_LICENCES, PATCH_NOW, RENEW_CERTIFICATE,
+    REFRESH_HARDWARE, RIGHT_SIZE_LICENCE
+}
