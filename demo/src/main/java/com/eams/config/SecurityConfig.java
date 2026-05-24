@@ -83,6 +83,11 @@ public class SecurityConfig {
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
         config.setMaxAge(3600L);
+        config.setAllowedOrigins(List.of(
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://app.eams.example.com"  
+));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/api/**", config);
